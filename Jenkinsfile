@@ -1,4 +1,13 @@
 pipeline {
+	def remote = [:]
+	remote.name = 'test'
+	remote.host = '192.168.1.73'
+	remote.user = 'moi'
+	remote.port = 22
+	remote.password = 'password'
+	remote.allowAnyHosts = true
+
+
     agent any
 
 	tools {
@@ -46,14 +55,8 @@ pipeline {
 				bat 'mvn -Dmaven.test.skip=true package'
             }
         }
+		
 		stage('deploy') {
-			def remote = [:]
-			remote.name = 'test'
-			remote.host = '192.168.1.73'
-			remote.user = 'moi'
-			remote.port = 22
-			remote.password = 'password'
-			remote.allowAnyHosts = true
 			steps {
 				echo 'deploy artifact'
 				sshCommand remote: remote, command: "ls -lrt"
