@@ -1,12 +1,14 @@
-pipeline {
-	def remote = [:]
-	remote.name = 'test'
-	remote.host = '192.168.1.73'
-	remote.user = 'moi'
-	remote.port = 22
-	remote.password = 'password'
-	remote.allowAnyHosts = true
+def remote = [:]
+remote.name = 'test'
+remote.host = '192.168.1.73'
+remote.user = 'moi'
+remote.port = 22
+remote.password = 'password'
+remote.allowAnyHosts = true
 
+
+
+pipeline {
 
     agent any
 
