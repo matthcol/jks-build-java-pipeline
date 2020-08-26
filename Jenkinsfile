@@ -10,6 +10,7 @@ pipeline {
 			steps {
 				git url: 'https://github.com/matthcol/jks-geometry.git' 
 			}
+		}
 
         stage('compile') {
             steps {
