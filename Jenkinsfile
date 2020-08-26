@@ -69,7 +69,7 @@ pipeline {
 						remote.passphrase = passphrase
 
 						echo 'deploy artifact'
-						sshCommand remote: remote, command: "ls -lrt"
+						sshPut remote: remote, from: 'target/geometry.jar', into: 'repo-artifact-mc'
 					}
 				}
 			}
