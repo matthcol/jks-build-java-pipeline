@@ -11,15 +11,7 @@ remote.timoutSec = 3000
 
 pipeline {
 
-    agent { node {
-		label: 'with-ssh'
-		withCredentials([sshUserPrivateKey(credentialsId: 'sshTest', keyFileVariable: 'identity', passphraseVariable: 'passphrase', usernameVariable: 'userName')]) {
-			remote.user = userName
-			remote.identityFile = identity
-			remote.passphrase = passphrase
-			}
-		}
-	}
+    agent any
 	
 
 		tools {
@@ -70,8 +62,14 @@ pipeline {
 		
 		stage('deploy') {
 			steps {
-				echo 'deploy artifact'
-				sshCommand remote: remote, command: "ls -lrt"
+				withCredentials([sshUserPrivateKey(credentialsId: 'sshTest', keyFileVariable: 'identity', passphraseVariable: 'passphrase', usernameVariable: 'userName')]) {
+					remote.user = userName
+					remote.identityFile = identity
+					remote.passphrase = passphrase
+
+					echo 'deploy artifact'
+					sshCommand remote: remote, command: "ls -lrt"
+				}
 			}
 		}
 	}
