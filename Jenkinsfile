@@ -59,9 +59,10 @@ pipeline {
             }
         }
 	
-		withCredentials([sshUserPrivateKey(credentialsId: 'sshTest', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+		withCredentials([sshUserPrivateKey(credentialsId: 'sshTest', keyFileVariable: 'identity', passphraseVariable: 'passphrase', usernameVariable: 'userName')]) {
 			remote.user = userName
 			remote.identityFile = identity
+			remote.passphrase = passphrase
 			stage('deploy') {
 				steps {
 					echo 'deploy artifact'
