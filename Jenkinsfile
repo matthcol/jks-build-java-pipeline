@@ -21,6 +21,7 @@ pipeline {
 			steps {
 				echo 'test'
 				bat 'mvn -Dmaven.compile.skip=true test'
+				echo 'step after test in stage test'
 			}
 		}
         stage('package') {
