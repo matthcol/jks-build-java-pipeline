@@ -12,7 +12,7 @@ remote.timoutSec = 3000
 pipeline {
 
     agent { node {
-	
+		label: 'with-ssh'
 		withCredentials([sshUserPrivateKey(credentialsId: 'sshTest', keyFileVariable: 'identity', passphraseVariable: 'passphrase', usernameVariable: 'userName')]) {
 			remote.user = userName
 			remote.identityFile = identity
