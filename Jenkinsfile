@@ -5,6 +5,7 @@ remote.user = 'moi'
 remote.port = 22
 remote.password = 'password'
 remote.allowAnyHosts = true
+remote.timoutSec = 120
 
 
 
