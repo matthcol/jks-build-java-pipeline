@@ -11,13 +11,18 @@ pipeline {
 				git url: 'https://github.com/matthcol/jks-geometry.git' 
 			}
 		}
-
         stage('compile') {
             steps {
                 echo 'compile'
-                bat 'mvn compile'
+                bat 'mvn clean compile'
             }
         }
+		stage('test') {
+			steps {
+				echo 'test'
+				bat 'mvn -Dmaven.compile.skip=true test'
+			}
+		}
         stage('package') {
             steps {
                 echo '''package
