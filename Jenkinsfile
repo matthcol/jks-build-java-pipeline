@@ -11,12 +11,15 @@ remote.timoutSec = 3000
 
 pipeline {
 
-    agent any { node {
+    agent { node {
 	
 		withCredentials([sshUserPrivateKey(credentialsId: 'sshTest', keyFileVariable: 'identity', passphraseVariable: 'passphrase', usernameVariable: 'userName')]) {
 			remote.user = userName
 			remote.identityFile = identity
 			remote.passphrase = passphrase
+			}
+		}
+	}
 	
 
 		tools {
@@ -71,5 +74,5 @@ pipeline {
 				sshCommand remote: remote, command: "ls -lrt"
 			}
 		}
-	}}}}
+	}
 }
