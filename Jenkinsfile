@@ -43,7 +43,7 @@ pipeline {
         stage('package') {
             steps {
                 echo 'package'
-				bat 'mvn -Dmaven.test.skip=true' package
+				bat 'mvn -Dmaven.test.skip=true package'
             }
         }
     }
