@@ -26,6 +26,8 @@ pipeline {
 			post {
 				always {
 					echo 'always after test'
+					//JUnitResultArchiver testResults: 'target/surefire-reports/TEST*.xml'
+					junit 'target/surefire-reports/TEST*.xml'
 				}	
 				success {
 					echo 'test stage successfull'
