@@ -1,6 +1,6 @@
 def remote = [:]
 remote.name = 'test'
-remote.host = '192.168.1.73'
+remote.host = '192.168.1.63'
 remote.port = 22
 // remote.user = 'moi'
 // remote.password = 'password'
