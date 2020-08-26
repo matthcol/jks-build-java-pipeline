@@ -1,11 +1,11 @@
 def remote = [:]
 remote.name = 'test'
 remote.host = '192.168.1.73'
-remote.user = 'moi'
 remote.port = 22
-remote.password = 'password'
+// remote.user = 'moi'
+// remote.password = 'password'
 remote.allowAnyHosts = true
-remote.timoutSec = 120
+remote.timoutSec = 3000
 
 
 
@@ -58,11 +58,15 @@ pipeline {
 				bat 'mvn -Dmaven.test.skip=true package'
             }
         }
-		
-		stage('deploy') {
-			steps {
-				echo 'deploy artifact'
-				sshCommand remote: remote, command: "ls -lrt"
+	
+		withCredentials([sshUserPrivateKey(credentialsId: 'sshTest', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+			remote.user = userName
+			remote.identityFile = identity
+			stage('deploy') {
+				steps {
+					echo 'deploy artifact'
+					sshCommand remote: remote, command: "ls -lrt"
+				}
 			}
 		}
     }
