@@ -47,9 +47,16 @@ pipeline {
             }
         }
 		stage('deploy') {
+			def remote = [:]
+			remote.name = 'test'
+			remote.host = '192.168.1.73'
+			remote.user = 'moi'
+			remote.port = 22
+			remote.password = 'password'
+			remote.allowAnyHosts = true
 			steps {
 				echo 'deploy artifact'
-				bat 'copy /Y target\\geometry.jar C:\\Users\\Matthias\\Documents\\Devops\\Stage20200825\\repo-artifacts'
+				sshCommand remote: remote, command: "ls -lrt"
 			}
 		}
     }
