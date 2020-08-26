@@ -49,7 +49,7 @@ pipeline {
 		stage('deploy') {
 			steps {
 				echo 'deploy artifact'
-				bat 'copy target/geometry.jar C:/Users/Matthias/Documents/Devops/Stage20200825/repo-artifacts'
+				bat 'copy /Y target\\geometry.jar C:\\Users\\Matthias\\Documents\\Devops\\Stage20200825\\repo-artifacts'
 			}
 		}
     }
