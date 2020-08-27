@@ -76,7 +76,7 @@ pipeline {
 						remote.passphrase = passphrase
 
 						echo 'deploy artifact'
-						sshPut remote: remote, from: "target/${params.PACKAGE}', into: 'repo-artifact-mc'
+						sshPut remote: remote, from: "target/${params.PACKAGE}", into: 'repo-artifact-mc'
 					}
 				}
 			}
