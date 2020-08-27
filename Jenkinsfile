@@ -13,6 +13,12 @@ pipeline {
 
     agent any
 	
+		parameters {
+			string(name: 'REPO', defaultValue: 'https://github.com/matthcol', description: '')	
+			string(name: 'PROJECT', defaultValue: 'mc2020.cinema.git', description: '')	
+			string(name: 'BRANCH', defaultValue: 'qualif', description: '')
+			string(name: 'PACKAGE', defaultValue: 'cinema.jar', description: '')
+		}
 
 		tools {
 			maven "M3"
@@ -21,7 +27,8 @@ pipeline {
 		stages {
 			stage('clone') {
 				steps {
-					git url: 'https://github.com/matthcol/jks-geometry.git' 
+					git url: "${params.REPO}/${params.PROJECT}"
+						branch: "${params.BRANCH}"
 				}
 			}
 			stage('compile') {
@@ -60,7 +67,7 @@ pipeline {
 				}
 			}
 		
-		stage('deploy') {
+		stage('publish') {
 			steps {
 				script {
 					withCredentials([sshUserPrivateKey(credentialsId: 'sshTest', keyFileVariable: 'identity', passphraseVariable: 'passphrase', usernameVariable: 'userName')]) {
@@ -69,7 +76,7 @@ pipeline {
 						remote.passphrase = passphrase
 
 						echo 'deploy artifact'
-						sshPut remote: remote, from: 'target/geometry.jar', into: 'repo-artifact-mc'
+						sshPut remote: remote, from: "target/${params.PACKAGE}', into: 'repo-artifact-mc'
 					}
 				}
 			}
