@@ -27,7 +27,7 @@ pipeline {
 		stages {
 			stage('clone') {
 				steps {
-					git url: "${params.REPO}/${params.PROJECT}"
+					git url: "${params.REPO}/${params.PROJECT}",
 						branch: "${params.BRANCH}"
 				}
 			}
